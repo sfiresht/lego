@@ -17,30 +17,35 @@ motor_d = Motor(Port.D)
 sensor = ColorDistanceSensor(Port.C)
 
 
+def turn_90_deg(side):
+    if side=='right':
+        #turn right 90 degrees
+        motor_a.run_time(-500, 850, then=Stop.HOLD,wait=False)
+        motor_b.run_time(-500, 850, then=Stop.HOLD)
+    elif side=='left':
+        #turn left 90 degrees
+        motor_a.run_time(500, 850, then=Stop.HOLD,wait=False)
+        motor_b.run_time(500, 850, then=Stop.HOLD)
+
+def rect():
+    #each run of this function will get one side of the rectangular + turn right
+    #move forward
+    motor_a.run_time(-500, 3000, then=Stop.HOLD,wait=False)  
+    motor_b.run_time(500, 3000, then=Stop.HOLD)
+    turn_90_deg('right')
 
 
 
-# Run both motors for 2 seconds
-# the wait=false flag tells the code not to wait to this line to finish, instead just ove on, that way the next motor will be running as wel at the same time
-motor_a.run_time(500, 1000, then=Stop.HOLD,wait=False)  
-motor_b.run_time(500, 1000, then=Stop.HOLD)
-
-motor_a.run_time(500, 2000, then=Stop.HOLD,wait=False)  
-motor_b.run_time(-500, 2000, then=Stop.HOLD)
-
-#move motor d for an angle
-#print(motor_d.angle())
-
-motor_d.run_angle(30,30, then=Stop.HOLD)
-wait(2000)
-motor_d.run_angle(60,-60, then=Stop.HOLD)
-motor_d.run_angle(30,30, then=Stop.HOLD)
-print("back on track")
 
 
+for i in range(4):
+    rect()
+    
+
+print("back to step 1")
 print(Color.RED)
 sensor.light.on(Color.RED)
-wait(5000)
+wait(2000)
 sensor.light.off()
 
 # Say goodbye and give some time to send it.
@@ -50,6 +55,3 @@ wait(100)
 
 # Shut the hub down.
 hub.system.shutdown()
-
-# Change LED color to red
-#hub.light.on((100, 0, 0))  # RGB: Red <<<<< doesn't work
