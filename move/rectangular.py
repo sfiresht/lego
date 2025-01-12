@@ -16,8 +16,15 @@ motor_b = Motor(Port.B)
 motor_d = Motor(Port.D)
 sensor = ColorDistanceSensor(Port.C)
 
+
+
+
+
 # Run both motors for 2 seconds
 # the wait=false flag tells the code not to wait to this line to finish, instead just ove on, that way the next motor will be running as wel at the same time
+motor_a.run_time(500, 1000, then=Stop.HOLD,wait=False)  
+motor_b.run_time(500, 1000, then=Stop.HOLD)
+
 motor_a.run_time(500, 2000, then=Stop.HOLD,wait=False)  
 motor_b.run_time(-500, 2000, then=Stop.HOLD)
 

@@ -1,0 +1,18 @@
+#TBD for loop 
+if b > a:
+    print("B is bigger than A")
+
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  print(x)
+
+i = 1
+while i < 6:
+  print(i)
+  i += 1
+
+
+
+  Classes
+
+  https://www.w3schools.com/python/python_classes.asp
